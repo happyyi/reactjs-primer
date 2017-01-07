@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="./build/react.js"></script>
+<script src="./build/react-dom.js"></script>
+<script src="http://cdn.bootcss.com/babel-core/5.8.23/browser.min.js"></script>
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.js"></script>
+<script type="text/babel">
+    var count=0;
+    var style={
+        color:'red',
+        border:'1px solid #000'
+    }
+    var HelloWorld=React.createClass({
+        getDefaultProps:function () {
+            console.log('getDefalutProps',1);
+            return  {name:'Tom'}
+        },
+        getInitialState:function () {
+            console.log('getInitialState',2);
+            return {
+                myCount:count++,
+                ready:false
+            }
+        },
+        componentWillMount:function () {
+            console.log('componentWillMount',3);
+            this.setState({ready:true})
+        },
+        render:function () {
+            console.log('render',4);
+            return <p ref="chlidp">Hello,{this.props.name?this.props.name:'World'}<br />{''+this.state.ready} {this.state.myCount}</p>
+        },
+        componentDidMount:function(){
+            console.log("comopnentDidMount",5);
+            $(ReactDOM.findDOMNode(this)).append("surprise!");
+        }
+
+    })
+    ReactDOM.render(<div style={style}><HelloWorld></HelloWorld><br/><HelloWorld></HelloWorld></div>,document.body);
+</script>
+</body>
+</html>

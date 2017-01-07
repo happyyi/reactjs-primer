@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="./build/react.js"></script>
+<script src="./build/react-dom.js"></script>
+<script src="http://cdn.bootcss.com/babel-core/5.8.23/browser.min.js"></script>
+<script type="text/babel">
+    var style={
+        color:'red',
+        border:'1px solid #000'
+    };;
+    var Hello=React.createClass({
+        getDefaultProps:function(){
+            console.log('getDefalutProps',1);
+        },
+        getInitialState:function () {
+            console.log('getInitialState',2);
+            return null;
+        },
+        componentWillMount:function () {
+            console.log('compentWillMount',3)
+        },
+        render:function(){
+            console.log('render',4);
+            return <p ref="childp">Hello {(function(obj){
+                if (obj.props.name)
+                    return obj.props.name
+                else
+                    return 'World'
+            })(this)}</p>
+        },
+        componentDidMount:function () {
+            console.log('compentDidMount',5)
+        }
+    })
+    ReactDOM.render(<div style={style}><Hello></Hello></div>,document.body);
+</script>
+</body>
+</html>
